@@ -23,6 +23,7 @@ export async function GET() {
     return NextResponse.json({ posts });
 }
 
+
 export async function DELETE(req) {
     const id = req.nextUrl.searchParams.get("id");
     await connectMongoDB();

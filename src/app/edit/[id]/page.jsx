@@ -2,13 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter, redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 function EditPostPage({ params }) {
 
     const { id } = params;
-
-    console.log(id)
 
     const [postData, setPostData] = useState("");
     
@@ -40,7 +38,16 @@ function EditPostPage({ params }) {
 
     useEffect(() => {
         getPostById(id);
-    }, [])
+    }, [id]);
+
+   
+    useEffect(() => {
+        if (postData?.post) {
+            setNewTitle(postData.post.title);
+            setNewContent(postData.post.content);
+            setNewDueDate(postData.post.duedate); 
+        }
+    }, [postData]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,26 +82,25 @@ function EditPostPage({ params }) {
         <input 
             onChange={(e) => setNewTitle(e.target.value)} 
             type="text" 
-            className='w-[300px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
-            placeholder={postData?.post?.title} 
+            className='w-[1000px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
+            value={newTitle} 
         />
         <textarea 
             onChange={(e) => setNewContent(e.target.value)} 
-            className='w-[300px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
-            placeholder={postData?.post?.content}>
-
+            className='w-[1000px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
+            value={newContent}>
         </textarea>
 
         <input 
-                onChange={(e) => setNewDueDate(e.target.value)} 
-                type="date" 
-                className='w-[300px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
-                placeholder='กำหนดวันที่ต้องทำ' 
+            onChange={(e) => setNewDueDate(e.target.value)} 
+            type="datetime-local" 
+            className='w-[1000px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
+            value={newDueDate}
         />
         <button 
             type='submit' 
             className='bg-green-500 text-white border py-2 px-3 rounded text-lg my-2'>
-            Update Post
+            แก้ไข
         </button>
         </form>
     </div>

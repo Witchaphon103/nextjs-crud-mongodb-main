@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import Image from "next/image";
+
 import Link from 'next/link'
 import DeleteBtn from './DeleteBtn';
+
 
 export default function Home() {
 
@@ -39,13 +40,19 @@ export default function Home() {
      <hr className="my-3" />
      <button className="bg-green-500 p-3 text-white rounded"><Link href="/create">สร้างโพสต์</Link></button>
      
-     <div className="grid grid-cols-4 mt-3 gap-5">
+     <div className="grid grid-cols- mt-3 gap-5">
       {postData && postData.length > 0 ? (
         postData.map(val => (
           <div key={val._id} className='shadow-xl my-10 p-10 rounded-xl'>
             <h4 className='text-2xl'>{val.title}</h4>
             <p>{val.content}</p>
             <p>{val.duedate}</p>
+            <p>สถานะ: {status === 'completed' ? 'เสร็จแล้ว' : 'ยังไม่เสร็จ'}</p>
+            <button
+                onClick={() => handleStatusChange(task._id, status === 'completed' ? 'not completed' : 'completed')}
+                className='bg-blue-500 text-white py-2 px-3 rounded-md'>
+                {status === 'completed' ? 'ทำให้ไม่เสร็จ' : 'ทำให้เสร็จ'}
+            </button>
             <div className='mt-5'>
               <Link className='bg-gray-500 text-white border py-2 px-3 rounded-md text-lg my-2' href={`/edit/${val._id}`}>แก้ไข</Link>
               <DeleteBtn id={val._id} />

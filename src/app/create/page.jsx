@@ -43,32 +43,34 @@ function CreatePostPage() {
     }
 
   return (
-    <div className='container mx-auto py-10'>
-        <h3 className='text-3xl font-bold'>สร้างงานขึ้นใหม่</h3>
+    <div className='container mx-auto py-10 flex h-screen'>
+        <div className='w-full max-w-xl'>
+        <h3 className='text-3xl font-bold '>สร้างงานขึ้นใหม่</h3>
         <hr className='my-3' />
         
         <form onSubmit={handleSubmit}>
         <input 
-        onChange={(e) => setTitle(e.target.value)} 
+                onChange={(e) => setTitle(e.target.value)} 
                 type="text" 
-                className='w-[300px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
+                className='w-[1000px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
                 placeholder='ขื่องาน' />
         <textarea 
                 onChange={(e) => setContent(e.target.value)} 
-                className='w-[300px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
+                className='w-[1000px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
                 placeholder='รายละเอียดงาน'>
         </textarea>
         
         <input 
                 onChange={(e) => setDueDate(e.target.value)} 
-                type="date" 
-                className='w-[300px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
+                type="datetime-local" 
+                className='w-[1000px] block bg-gray-200 border py-2 px-3 rounded text-lg my-2' 
                 placeholder='กำหนดวันที่ต้องทำ' 
             />
 
         <button type='submit' className='bg-green-500 text-white border py-2 px-3 rounded text-lg my-2'>สร้างโพสต์</button>
         </form>
         <Link href="/" className='bg-gray-500 inline-block text-white border py-2 px-3 rounded my-2'>กลับไปหน้าโพสค์</Link>
+    </div>
     </div>
   )
 }
